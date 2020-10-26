@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react'
-import { Box, Color, Text, useInput } from 'ink'
+import { Box, Text, useInput } from 'ink'
 
 interface IProps {
   name?: string
 }
 const InkBoilerplate: FunctionComponent<IProps> = ({ name = 'Someone' }) => {
-  useInput(input => {
+  useInput((input) => {
     if (input === 'q') {
       process.exit(0)
     }
@@ -14,12 +14,10 @@ const InkBoilerplate: FunctionComponent<IProps> = ({ name = 'Someone' }) => {
   return (
     <>
       <Box>
-        <Text>
-          Hello, {name}. <Color green>From Ink Boilerplate></Color>
-        </Text>
+        <Text color="green">Hello, {name}. From Ink Boilerplate</Text>
       </Box>
       <Box marginTop={1}>
-        <Color redBright>Press 'q' for exit</Color>
+        <Text color="redBright">Press 'q' for exit</Text>
       </Box>
     </>
   )
