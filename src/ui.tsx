@@ -6,6 +6,7 @@ interface IProps {
 }
 const InkBoilerplate: FunctionComponent<IProps> = ({ name = 'Someone' }) => {
   useInput((input) => {
+    console.log(input)
     if (input === 'q') {
       process.exit(0)
     }

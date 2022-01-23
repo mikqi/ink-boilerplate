@@ -4,7 +4,7 @@ import React from 'react'
 import { render } from 'ink'
 import meow from 'meow'
 
-import InkBoilerplate from '.'
+import InkBoilerplate from './ui'
 
 const cli = meow(`
   Usage

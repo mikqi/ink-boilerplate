@@ -1,5 +1,4 @@
 module.exports = {
-  roots: ['<rootDir>/tests', '<rootDir>/src'],
   testEnvironment: 'node',
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
@@ -9,7 +8,8 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   collectCoverage: true,
   collectCoverageFrom: [
-    '**/*.{ts,tsx}',
+    'src/*.{ts,tsx}',
+    '!src/bin.ts',
     '!**/node_modules/**',
     '!**/vendor/**',
     '!**/generated/**',
