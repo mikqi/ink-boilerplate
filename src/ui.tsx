@@ -18,7 +18,7 @@ const InkBoilerplate: FunctionComponent<IProps> = ({ name = 'Someone' }) => {
         <Text color="green">Hello, {name}. From Ink Boilerplate</Text>
       </Box>
       <Box marginTop={1}>
-        <Text color="redBright">Press 'q' for exit</Text>
+        <Text color="redBright">Press &lsquo;q&rsquo; for exit</Text>
       </Box>
     </>
   )

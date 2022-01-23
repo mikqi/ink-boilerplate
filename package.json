@@ -19,10 +19,11 @@
   "scripts": {
     "build": "tsc -d",
     "dev": "ts-node --files src/bin.ts",
+    "prepare": "husky install",
     "prepack": "npm run build",
     "prepublishOnly": "npm run build",
     "pretest": "npm run build",
-    "lint": "pretty-quick --staged",
+    "lint": "eslint . --ext .ts,.tsx,.js --config .eslintrc.js --max-warnings=0",
     "test": "jest"
   },
   "dependencies": {
@@ -37,6 +38,13 @@
     "@types/node": "17.0.10",
     "@types/react": "17.0.38",
     "@types/update-notifier": "5.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
+    "eslint": "^8.7.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
     "ink-testing-library": "^2.1.0",
     "jest": "^27.4.7",
