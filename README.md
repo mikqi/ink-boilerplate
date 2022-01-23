@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="docs/logo.png" width="300" />
+  <img src="assets/logo.png" width="300" />
 </h1>
 
 # Ink Boilerplate
@@ -10,6 +10,7 @@
 
 - [Typescript](http://www.typescriptlang.org/)
 - [Prettier](https://prettier.io/)
+- [ESLint](https://eslint.org/)
 - [PNPM](https://pnpm.js.org/)
 - [Jest](https://jestjs.io/)
 - [Husky](https://github.com/typicode/husky)
