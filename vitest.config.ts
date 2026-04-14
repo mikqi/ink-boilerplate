@@ -9,7 +9,7 @@ export default defineConfig({
     environment: 'node',
     coverage: {
       provider: 'v8',
-      include: ['src/*.{ts,tsx}'],
+      include: ['src/**/*.{ts,tsx}'],
       exclude: ['src/bin.ts', '**/node_modules/**'],
       reporter: ['json', 'lcov', 'text', 'clover', 'html'],
       reportsDirectory: './coverage',
