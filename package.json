@@ -21,7 +21,7 @@
     "build": "tsc -d",
     "dev": "ts-node --esm --files src/bin.ts",
     "lint:fix": "eslint . --ext .ts,.tsx,.js --config .eslintrc.cjs --max-warnings=0 --fix",
-    "prepare": "git config --local core.hooksPath .git/hooks && simple-git-hooks",
+    "prepare": "simple-git-hooks",
     "prepack": "pnpm run build",
     "prepublishOnly": "pnpm run build",
     "pretest": "pnpm run build",

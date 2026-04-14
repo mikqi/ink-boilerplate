@@ -24,6 +24,7 @@ This project inspired by [Emma-cli](https://github.com/maticzav/emma-cli/) proje
 During the `prepare` lifecycle (including `pnpm install`), the repository configures Git hooks with `simple-git-hooks`.
 The included `pre-commit` hook runs `pnpm run lint:fix`.
 If the hook rewrites files, review and re-stage those changes before re-running the commit.
+If you are migrating from an older local checkout that used a custom hooks path, reset it with `git config core.hooksPath .git/hooks`.
 
 ## License
 
