@@ -1,5 +1,5 @@
 import { Box, Text, useInput } from 'ink'
-import { type FC } from 'react'
+import type { FC } from 'react'
 
 interface IProps {
   name?: string
