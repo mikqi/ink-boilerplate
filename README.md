@@ -64,10 +64,43 @@ pnpm run build
 # Run tests
 pnpm run test
 
+# Run tests with coverage (outputs to ./coverage/)
+pnpm run test:coverage
+
 # Lint / format
 pnpm run lint
 pnpm run format
 ```
+
+## Examples
+
+The `examples/` directory contains three self-contained demos that showcase
+different levels of Ink complexity. Run any of them with `npx tsx`:
+
+```bash
+npx tsx examples/small.tsx
+npx tsx examples/medium.tsx
+npx tsx examples/complex.tsx
+```
+
+### Small — Static styled output (`examples/small.tsx`)
+
+A static display that renders a styled system-info card using `Box` and `Text`
+color props, then exits immediately. Good starting point for understanding
+basic layout primitives.
+
+### Medium — Interactive counter (`examples/medium.tsx`)
+
+A counter component that responds to keyboard input (`↑`/`↓`, `r` to reset,
+`q` to quit). Demonstrates `useState`, `useInput`, and a progress bar built
+from derived state.
+
+### Complex — Multi-feature todo manager (`examples/complex.tsx`)
+
+A full interactive todo manager with navigation, toggling, task addition (type
+into an inline input), deletion, and filter cycling (All → Active →
+Completed). Demonstrates multiple hooks, `useStdin`, filtered/derived state,
+multi-mode input handling, and component composition.
 
 ## Development
 
