@@ -21,7 +21,7 @@
     "build": "tsc -d",
     "dev": "ts-node --esm --files src/bin.ts",
     "lint:fix": "eslint . --ext .ts,.tsx,.js --config .eslintrc.cjs --max-warnings=0 --fix",
-    "prepare": "node scripts/setup-git-hooks.mjs",
+    "prepare": "git config --local core.hooksPath .git/hooks && simple-git-hooks",
     "prepack": "pnpm run build",
     "prepublishOnly": "pnpm run build",
     "pretest": "pnpm run build",
@@ -49,12 +49,16 @@
     "jest": "^30.3.0",
     "jest-serializer-ansi": "^1.0.3",
     "prettier": "^3.8.2",
+    "simple-git-hooks": "2.13.1",
     "ts-jest": "^29.4.9",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
   "engines": {
     "node": ">=20.0.0"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm run lint:fix"
   },
   "license": "MIT"
 }
