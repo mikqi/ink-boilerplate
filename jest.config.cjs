@@ -1,10 +1,12 @@
 module.exports = {
+  preset: 'ts-jest/presets/default-esm',
   testEnvironment: 'node',
-  transform: {
-    '^.+\\.tsx?$': 'ts-jest',
-  },
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
   testPathIgnorePatterns: ['/node_modules/', '/__fixtures__/'],
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
+  moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.js$': '$1',
+  },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   collectCoverage: true,
   collectCoverageFrom: [

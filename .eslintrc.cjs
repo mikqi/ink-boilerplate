@@ -1,12 +1,13 @@
 module.exports = {
   root: true,
   env: {
-    es2021: true,
+    es2022: true,
     node: true,
   },
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
     'prettier',
     'plugin:prettier/recommended',
     'plugin:@typescript-eslint/recommended',
@@ -20,5 +21,10 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['prettier', 'react-hooks', 'react', '@typescript-eslint'],
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
   rules: {},
 }

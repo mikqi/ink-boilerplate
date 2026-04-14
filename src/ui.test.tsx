@@ -1,7 +1,6 @@
-import * as React from 'react'
 import { render } from 'ink-testing-library'
 
-import InkBoilerplate from './ui'
+import InkBoilerplate from './ui.js'
 
 test('it should work properly', () => {
   const name = 'John Doe'
