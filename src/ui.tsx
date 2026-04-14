@@ -1,10 +1,10 @@
-import React, { FunctionComponent } from 'react'
 import { Box, Text, useInput } from 'ink'
+import { type FC } from 'react'
 
 interface IProps {
   name?: string
 }
-const InkBoilerplate: FunctionComponent<IProps> = ({ name = 'Someone' }) => {
+const InkBoilerplate: FC<IProps> = ({ name = 'Someone' }) => {
   useInput((input) => {
     console.log(input)
     if (input === 'q') {

@@ -1,21 +1,31 @@
 #!/usr/bin/env node
 
-import React from 'react'
 import { render } from 'ink'
 import meow from 'meow'
+import { createElement } from 'react'
 
-import InkBoilerplate from './ui'
+import InkBoilerplate from './ui.js'
 
-const cli = meow(`
-  Usage
-    $ inkboilerplate
+const cli = meow(
+  `
+    Usage
+      $ inkboilerplate
 
-  Options
-    --name  Your name
+    Options
+      --name  Your name
 
-  Examples
-    $ inkboilerplate --name=John
-    Hello, John. From Ink Boilerplate
-`)
+    Examples
+      $ inkboilerplate --name=John
+      Hello, John. From Ink Boilerplate
+  `,
+  {
+    importMeta: import.meta,
+    flags: {
+      name: {
+        type: 'string',
+      },
+    },
+  },
+)
 
-render(React.createElement(InkBoilerplate, cli.flags))
+render(createElement(InkBoilerplate, { name: cli.flags.name }))
