@@ -1,7 +1,7 @@
 import { Box, Text } from 'ink'
 import type { FC } from 'react'
 
-import type { Status } from './small.js'
+import StatusBadge, { type Status } from './small.js'
 
 export interface Task {
   id: string
@@ -14,26 +14,15 @@ interface Props {
   title?: string
 }
 
-const STATUS_ICONS: Record<Status, string> = {
-  pending: '○',
-  running: '◐',
-  success: '✓',
-  error: '✗',
-}
-
-const STATUS_COLORS: Record<Status, string> = {
-  pending: 'yellow',
-  running: 'blue',
-  success: 'green',
-  error: 'red',
-}
-
 /**
  * Medium example — TaskList
  *
  * A display component that accepts a list of tasks and renders each one with a
  * coloured status icon. It also computes a summary (done / total) from the
  * incoming props, showing how to derive state without `useState`.
+ *
+ * Each task row is rendered using the `StatusBadge` component from the small
+ * example, demonstrating component composition.
  */
 const TaskList: FC<Props> = ({ tasks, title = 'Tasks' }) => {
   const done = tasks.filter((t) => t.status === 'success').length
@@ -50,9 +39,7 @@ const TaskList: FC<Props> = ({ tasks, title = 'Tasks' }) => {
       </Box>
       {tasks.map((task) => (
         <Box key={task.id}>
-          <Text color={STATUS_COLORS[task.status]}>
-            {STATUS_ICONS[task.status]} {task.name}
-          </Text>
+          <StatusBadge status={task.status} label={task.name} />
         </Box>
       ))}
     </Box>
