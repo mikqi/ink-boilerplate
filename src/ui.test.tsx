@@ -1,4 +1,5 @@
 import { render } from 'ink-testing-library'
+import { expect, test } from 'vitest'
 
 import InkBoilerplate from './ui.js'
 
