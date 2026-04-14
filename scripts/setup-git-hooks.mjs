@@ -10,6 +10,9 @@ const preCommitHook = resolve(hooksDirectory, 'pre-commit')
 const warn = (message) => {
   console.warn(`[git-hooks] ${message}`)
 }
+const getErrorMessage = (error) => {
+  return error instanceof Error ? error.message : String(error)
+}
 
 if (!existsSync(preCommitHook)) {
   console.error(
@@ -18,8 +21,10 @@ if (!existsSync(preCommitHook)) {
   process.exit(1)
 }
 
+let isGitRepository = ''
+
 try {
-  const isGitRepository = execFileSync(
+  isGitRepository = execFileSync(
     'git',
     ['rev-parse', '--is-inside-work-tree'],
     {
@@ -28,14 +33,28 @@ try {
       stdio: ['ignore', 'pipe', 'ignore'],
     },
   ).trim()
+} catch (error) {
+  warn(
+    `Skipped setup because Git repository status could not be checked. ${getErrorMessage(error)}`,
+  )
+  process.exit(0)
+}
 
-  if (isGitRepository !== 'true') {
-    warn('Skipped setup because the current directory is not a Git repository.')
-    process.exit(0)
-  }
+if (isGitRepository !== 'true') {
+  warn('Skipped setup because the current directory is not a Git repository.')
+  process.exit(0)
+}
 
+try {
   chmodSync(preCommitHook, 0o755)
+} catch (error) {
+  warn(
+    `Skipped setup because ${relative(repositoryRoot, preCommitHook)} permissions could not be updated. ${getErrorMessage(error)}`,
+  )
+  process.exit(0)
+}
 
+try {
   execFileSync(
     'git',
     ['config', 'core.hooksPath', relative(repositoryRoot, hooksDirectory)],
@@ -45,7 +64,6 @@ try {
     },
   )
 } catch (error) {
-  const message = error instanceof Error ? error.message : String(error)
-  warn(`Skipped setup because Git hooks could not be configured. ${message}`)
+  warn(`Skipped setup because core.hooksPath could not be configured. ${getErrorMessage(error)}`)
   process.exit(0)
 }
