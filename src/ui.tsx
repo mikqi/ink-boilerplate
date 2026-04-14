@@ -1,10 +1,11 @@
 import { Box, Text, useInput } from 'ink'
 import { type FC } from 'react'
 
-interface IProps {
+interface Props {
   name?: string
 }
-const InkBoilerplate: FC<IProps> = ({ name = 'Someone' }) => {
+
+const InkBoilerplate: FC<Props> = ({ name = 'Someone' }) => {
   useInput((input) => {
     console.log(input)
     if (input === 'q') {

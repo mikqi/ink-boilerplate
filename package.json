@@ -18,7 +18,7 @@
     "cli"
   ],
   "scripts": {
-    "build": "tsc -d",
+    "build": "tsc",
     "dev": "ts-node --esm --files src/bin.ts",
     "prepare": "husky",
     "prepack": "pnpm run build",
