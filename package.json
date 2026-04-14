@@ -18,14 +18,16 @@
     "cli"
   ],
   "scripts": {
-    "build": "tsc",
-    "dev": "ts-node --esm --files src/bin.ts",
-    "prepare": "husky",
+    "build": "tsup",
+    "dev": "tsx src/bin.ts",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write .",
+    "format": "biome format --write .",
+    "check": "biome check --write .",
+    "prepare": "simple-git-hooks",
     "prepack": "pnpm run build",
     "prepublishOnly": "pnpm run build",
-    "pretest": "pnpm run build",
-    "lint": "eslint . --ext .ts,.tsx,.js --config .eslintrc.cjs --max-warnings=0",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --config jest.config.cjs"
+    "test": "vitest run"
   },
   "dependencies": {
     "ink": "^6.8.0",
@@ -33,28 +35,23 @@
     "react": "^19.2.5"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.4.11",
     "@types/ink-testing-library": "1.0.4",
-    "@types/jest": "30.0.0",
     "@types/node": "25.6.0",
     "@types/react": "19.2.14",
-    "@typescript-eslint/eslint-plugin": "^8.58.2",
-    "@typescript-eslint/parser": "^8.58.2",
-    "eslint": "^8.57.1",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.5",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "husky": "^9.1.7",
+    "@vitest/coverage-v8": "^4.1.4",
     "ink-testing-library": "^4.0.0",
-    "jest": "^30.3.0",
-    "jest-serializer-ansi": "^1.0.3",
-    "prettier": "^3.8.2",
-    "ts-jest": "^29.4.9",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "simple-git-hooks": "^2.13.1",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.4"
   },
   "engines": {
     "node": ">=20.0.0"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm run check"
   },
   "license": "MIT"
 }

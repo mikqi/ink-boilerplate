@@ -1,1 +1,0 @@
-pnpm exec eslint . --ext .ts,.tsx,.js --config .eslintrc.cjs --max-warnings=0 --fix
