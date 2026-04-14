@@ -60,7 +60,7 @@ try {
 try {
   execFileSync(
     'git',
-    ['config', 'core.hooksPath', hooksDirectory],
+    ['config', '--local', 'core.hooksPath', hooksDirectory],
     {
       cwd: repositoryRoot,
       stdio: 'ignore',
@@ -71,4 +71,4 @@ try {
   process.exit(0)
 }
 
-info(`Configured core.hooksPath to ${hooksDirectory}.`)
+info(`Configured core.hooksPath to ${relative(repositoryRoot, hooksDirectory)}.`)
