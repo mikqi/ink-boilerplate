@@ -7,8 +7,12 @@ const scriptDirectory = dirname(fileURLToPath(import.meta.url))
 const repositoryRoot = resolve(scriptDirectory, '..')
 const hooksDirectory = resolve(repositoryRoot, '.githooks')
 const preCommitHook = resolve(hooksDirectory, 'pre-commit')
+const warn = (message) => {
+  console.warn(`[git-hooks] ${message}`)
+}
 
 if (!existsSync(preCommitHook)) {
+  warn(`Skipped setup because ${relative(repositoryRoot, preCommitHook)} was not found.`)
   process.exit(0)
 }
 
@@ -37,6 +41,8 @@ try {
       stdio: 'ignore',
     },
   )
-} catch {
+} catch (error) {
+  const message = error instanceof Error ? error.message : 'Unknown error'
+  warn(`Skipped setup because Git hooks could not be configured. ${message}`)
   process.exit(0)
 }
