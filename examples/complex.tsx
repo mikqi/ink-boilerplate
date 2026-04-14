@@ -13,7 +13,7 @@
  * Run with: npx tsx examples/complex.tsx
  */
 
-import { Box, Text, render, useInput, useStdin } from 'ink'
+import { Box, Text, render, useApp, useInput, useStdin } from 'ink'
 import { type FC, useEffect, useMemo, useState } from 'react'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -104,6 +104,7 @@ const TodoApp: FC = () => {
   const [mode, setMode] = useState<'normal' | 'add'>('normal')
   const [draft, setDraft] = useState('')
 
+  const { exit } = useApp()
   const { setRawMode } = useStdin()
 
   // Enable raw mode so individual keystrokes are captured
@@ -169,7 +170,7 @@ const TodoApp: FC = () => {
     } else if (input === 'f') {
       setFilter((f) => FILTERS[(FILTERS.indexOf(f) + 1) % FILTERS.length])
     } else if (input === 'q') {
-      process.exit(0)
+      exit()
     }
   })
 

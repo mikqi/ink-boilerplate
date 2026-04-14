@@ -10,7 +10,7 @@
  * Run with: npx tsx examples/medium.tsx
  */
 
-import { Box, Text, render, useInput } from 'ink'
+import { Box, Text, render, useApp, useInput } from 'ink'
 import { type FC, useState } from 'react'
 
 const STEP = 1
@@ -30,6 +30,7 @@ const CounterBar: FC<{ value: number }> = ({ value }) => {
 
 const Counter: FC = () => {
   const [count, setCount] = useState(0)
+  const { exit } = useApp()
 
   useInput((input, key) => {
     if (key.upArrow || input === 'k') {
@@ -39,7 +40,7 @@ const Counter: FC = () => {
     } else if (input === 'r') {
       setCount(0)
     } else if (input === 'q') {
-      process.exit(0)
+      exit()
     }
   })
 
