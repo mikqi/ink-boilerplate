@@ -25,9 +25,9 @@
       "src/**",
       "*.ts",
       "*.json",
-      "!!**/dist",
-      "!!**/coverage",
-      "!!**/node_modules"
+      "!**/dist",
+      "!**/coverage",
+      "!**/node_modules"
     ]
   }
 }
