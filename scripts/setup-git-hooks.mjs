@@ -12,8 +12,10 @@ const warn = (message) => {
 }
 
 if (!existsSync(preCommitHook)) {
-  warn(`Skipped setup because ${relative(repositoryRoot, preCommitHook)} was not found.`)
-  process.exit(0)
+  console.error(
+    `[git-hooks] Expected ${relative(repositoryRoot, preCommitHook)} to exist before setup.`,
+  )
+  process.exit(1)
 }
 
 try {
@@ -28,6 +30,7 @@ try {
   ).trim()
 
   if (isGitRepository !== 'true') {
+    warn('Skipped setup because the current directory is not a Git repository.')
     process.exit(0)
   }
 
