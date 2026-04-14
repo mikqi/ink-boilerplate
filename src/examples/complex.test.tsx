@@ -10,6 +10,8 @@ const sampleItems: TodoItem[] = [
   { id: '4', label: 'Review PR', status: 'error' },
 ]
 
+// ── Static rendering ──────────────────────────────────────────────────────────
+
 test('renders the component title', () => {
   const { lastFrame } = render(<TodoApp initialItems={sampleItems} />)
   expect(lastFrame()).toContain('Todo Manager')
@@ -38,7 +40,7 @@ test('shows done/total summary', () => {
   expect(lastFrame()).toContain('1/4 done')
 })
 
-test('renders the progress bar', () => {
+test('renders the progress bar without NaN or Infinity', () => {
   const { lastFrame } = render(<TodoApp initialItems={sampleItems} />)
   const output = lastFrame() ?? ''
   expect(output).toContain('[')
@@ -46,16 +48,6 @@ test('renders the progress bar', () => {
   expect(output).toContain('%')
   expect(output).not.toContain('NaN')
   expect(output).not.toContain('Infinity')
-})
-
-test('renders the controls panel', () => {
-  const { lastFrame } = render(<TodoApp initialItems={sampleItems} />)
-  const output = lastFrame() ?? ''
-  expect(output).toContain('Controls')
-  expect(output).toContain('Navigate')
-  expect(output).toContain('Cycle status')
-  expect(output).toContain('Reset')
-  expect(output).toContain('Quit')
 })
 
 test('renders cursor indicator on first item by default', () => {
@@ -87,12 +79,13 @@ test('progress bar shows 0% when no tasks are done', () => {
   expect(output).not.toContain('Infinity')
 })
 
-test('renders without throwing when given an empty task list', () => {
+test('renders without throwing for an empty task list', () => {
   const renderEmpty = () => render(<TodoApp initialItems={[]} />)
   expect(renderEmpty).not.toThrow()
   const { lastFrame } = renderEmpty()
   const output = lastFrame() ?? ''
   expect(output).toContain('0/0 done')
+  expect(output).toContain('No tasks yet')
   expect(output).not.toContain('NaN')
   expect(output).not.toContain('Infinity')
 })
@@ -100,4 +93,59 @@ test('renders without throwing when given an empty task list', () => {
 test('renders default items when no props are passed', () => {
   const { lastFrame } = render(<TodoApp />)
   expect(lastFrame()).toContain('Todo Manager')
+})
+
+// ── Controls panel ────────────────────────────────────────────────────────────
+
+test('controls panel shows add / edit / delete shortcuts', () => {
+  const { lastFrame } = render(<TodoApp initialItems={sampleItems} />)
+  const output = lastFrame() ?? ''
+  expect(output).toContain('a : Add task')
+  expect(output).toContain('e : Edit task')
+  expect(output).toContain('d : Delete task')
+  expect(output).toContain('Navigate')
+  expect(output).toContain('Cycle status')
+  expect(output).toContain('Reset')
+  expect(output).toContain('Quit')
+})
+
+// ── Derived-state variants (verifiable via props) ─────────────────────────────
+
+test('single-item list renders exactly one task row', () => {
+  const single: TodoItem[] = [
+    { id: '1', label: 'Only task', status: 'pending' },
+  ]
+  const { lastFrame } = render(<TodoApp initialItems={single} />)
+  const output = lastFrame() ?? ''
+  expect(output).toContain('Only task')
+  expect(output).toContain('0/1 done')
+})
+
+test('renders a mix of all four statuses without throwing', () => {
+  const mixed: TodoItem[] = [
+    { id: '1', label: 'A', status: 'pending' },
+    { id: '2', label: 'B', status: 'running' },
+    { id: '3', label: 'C', status: 'success' },
+    { id: '4', label: 'D', status: 'error' },
+  ]
+  const renderMixed = () => render(<TodoApp initialItems={mixed} />)
+  expect(renderMixed).not.toThrow()
+  const { lastFrame } = renderMixed()
+  const output = lastFrame() ?? ''
+  expect(output).toContain('1/4 done')
+  expect(output).not.toContain('NaN')
+})
+
+test('progress bar is well-formed for a 50% completed list', () => {
+  const half: TodoItem[] = [
+    { id: '1', label: 'Done 1', status: 'success' },
+    { id: '2', label: 'Done 2', status: 'success' },
+    { id: '3', label: 'Pending 1', status: 'pending' },
+    { id: '4', label: 'Pending 2', status: 'pending' },
+  ]
+  const { lastFrame } = render(<TodoApp initialItems={half} />)
+  const output = lastFrame() ?? ''
+  expect(output).toContain('50%')
+  expect(output).not.toContain('NaN')
+  expect(output).not.toContain('Infinity')
 })
