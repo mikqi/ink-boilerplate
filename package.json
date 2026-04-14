@@ -49,7 +49,7 @@
     "jest": "^30.3.0",
     "jest-serializer-ansi": "^1.0.3",
     "prettier": "^3.8.2",
-    "simple-git-hooks": "2.13.1",
+    "simple-git-hooks": "^2.13.1",
     "ts-jest": "^29.4.9",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
