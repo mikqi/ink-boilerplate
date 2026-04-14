@@ -21,7 +21,7 @@ This project inspired by [Emma-cli](https://github.com/maticzav/emma-cli/) proje
 
 ## Development
 
-After `pnpm install`, the repository configures Git to use the versioned hooks in `.githooks/`.
+During the `prepare` lifecycle (including `pnpm install`), the repository configures Git to use the versioned hooks in `.githooks/`.
 The included `pre-commit` hook runs `pnpm run lint:fix`.
 If the hook rewrites files, review and re-stage those changes before re-running the commit.
 
