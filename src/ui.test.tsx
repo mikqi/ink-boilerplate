@@ -1,7 +1,7 @@
 import { render } from 'ink-testing-library'
 import { expect, test } from 'vitest'
 
-import InkBoilerplate from './ui.js'
+import InkBoilerplate from './ui'
 
 test('it should work properly', () => {
   const name = 'John Doe'
