@@ -13,11 +13,16 @@
 - [ESLint](https://eslint.org/)
 - [PNPM](https://pnpm.js.org/)
 - [Jest](https://jestjs.io/)
-- [Husky](https://github.com/typicode/husky)
+- Simple Git hooks
 
 You can read [ink documentation here](https://github.com/vadimdemedes/ink) and use these [component to make your CLI cool, cooler, coolest](https://github.com/vadimdemedes/ink#useful-components)
 
 This project inspired by [Emma-cli](https://github.com/maticzav/emma-cli/) project structures.
+
+## Development
+
+After `pnpm install`, the repository configures Git to use the versioned hooks in `.githooks/`.
+The included `pre-commit` hook runs `pnpm run lint:fix`.
 
 ## License
 
