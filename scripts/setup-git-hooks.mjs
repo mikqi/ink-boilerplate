@@ -45,7 +45,7 @@ try {
     },
   )
 } catch (error) {
-  const message = error instanceof Error ? error.message : 'Unknown error'
+  const message = error instanceof Error ? error.message : String(error)
   warn(`Skipped setup because Git hooks could not be configured. ${message}`)
   process.exit(0)
 }
